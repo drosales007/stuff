@@ -11,11 +11,11 @@
 from prettytable import PrettyTable
 
 RANKS = {'B4': 1, 'B3': 2, 'B2': 3, 'B1': 4,
-		 'S4': 5, 'S3': 6, 'S2': 7, 'S1': 8,
-		 'G4': 9, 'G3': 10, 'G2': 11, 'G1': 12,
-		 'P4': 13, 'P3': 14, 'P2': 15, 'P1': 16,
-		 'D4': 17, 'D3': 18, 'D2': 19, 'D1': 20,
-		 'M': 21}
+	 'S4': 5, 'S3': 6, 'S2': 7, 'S1': 8,
+	 'G4': 9, 'G3': 10, 'G2': 11, 'G1': 12,
+	 'P4': 13, 'P3': 14, 'P2': 15, 'P1': 16,
+	 'D4': 17, 'D3': 18, 'D2': 19, 'D1': 20,
+	 'M': 21}
 TOTAL_GAMES = 336
 TOTAL_WINS = 201
 TOTAL_LOSSES = 135
@@ -51,14 +51,14 @@ flood_w6, flood_l6, screw_w6, screw_l6, normal_w6, normal_l6 = 0, 0, 0, 0, 0, 0
 
 deck_table = PrettyTable()
 deck_table.field_names = ['Deck', 'Matches', 'Wins', 'Losses', 'Win %',
-						  'Play Wins', 'Play Losses', 'Play Win %',
-						  'Draw Wins', 'Draw Losses', 'Draw Win %']
+			  'Play Wins', 'Play Losses', 'Play Win %',
+			  'Draw Wins', 'Draw Losses', 'Draw Win %']
 rank_table = PrettyTable()
 rank_table.field_names = ['Rank', 'Paired Evenly', 'Paired Up', 'Paired Down',
-						  'Wins', 'Losses', 'Win %', 'Games to Next Rank']
+			  'Wins', 'Losses', 'Win %', 'Games to Next Rank']
 misc_table = PrettyTable()
 misc_table.field_names = ['Scenario', 'Games', 'Wins', 'Losses', 'Win %',
-						  '% of Matches']
+			  '% of Matches']
 
 
 f = 'Road to Mythic RDW - Standard.csv'
@@ -254,14 +254,14 @@ decks = {}
 for i in matches:
 	if not decks.get(matches[i]['Deck']):
 		decks[matches[i]['Deck']] = {'wins': 0,
-									 'losses': 0,
-									 'matches': 1,
-									 'play_wins': 0,
-									 'play_losses': 0,
-									 'pwin_pct': 0,
-									 'draw_wins': 0,
-									 'draw_losses': 0,
-									 'dwin_pct': 0}
+					     'losses': 0,
+					     'matches': 1,
+					     'play_wins': 0,
+					     'play_losses': 0,
+					     'pwin_pct': 0,
+					     'draw_wins': 0,
+					     'draw_losses': 0,
+					     'dwin_pct': 0}
 	else:
 		decks[matches[i]['Deck']]['matches'] += 1
 	if matches[i]['Result'] == 'W':
@@ -280,87 +280,85 @@ for i in matches:
 for i in decks:
 	if decks[i]['play_wins'] + decks[i]['play_losses'] > 0:
 		decks[i]['pwin_pct'] = round(100*decks[i]['play_wins']/
-						 			 (decks[i]['play_wins']+
-						 			 	decks[i]['play_losses']), 2)
+					     (decks[i]['play_wins']+
+					      decks[i]['play_losses']), 2)
 	else:
 		decks[i]['pwin_pct'] = '-'
 	if decks[i]['draw_wins'] + decks[i]['draw_losses'] > 0:
 		decks[i]['dwin_pct'] = round(100*decks[i]['draw_wins']/
-						 			 (decks[i]['draw_wins']+
-						 			 	decks[i]['draw_losses']), 2)
+					     (decks[i]['draw_wins']+
+					      decks[i]['draw_losses']), 2)
 	else:
 		decks[i]['dwin_pct'] = '-'
 print('Games Played: %(g)s\t\tWins: %(w)s\t\tLosses: %(l)s\t\tWin %%: '
-	  '%(p)s' % dict(g=TOTAL_GAMES, w=TOTAL_WINS, l=TOTAL_LOSSES, p=WIN_PCT))
+      '%(p)s' % dict(g=TOTAL_GAMES, w=TOTAL_WINS, l=TOTAL_LOSSES, p=WIN_PCT))
 print('Longest Win Streak: %(win)s\t\tLongest Losing Streak: %(lose)s'
-	  % dict(win=WIN_STREAK, lose=LOSE_STREAK))
+      % dict(win=WIN_STREAK, lose=LOSE_STREAK))
 print('Longest Play Streak: %(play)s\t\tLongest Draw Streak: %(draw)s\n'
-	  % dict(play=PLAY_STREAK, draw=DRAW_STREAK))
+      % dict(play=PLAY_STREAK, draw=DRAW_STREAK))
 
 print('Rank Specific Data:')
 rank_table.add_row(['Bronze', b_pe, b_pu, b_pd, b_wins, b_losses,
-					round(100*b_wins/(b_wins+b_losses), 2), b_wins+b_losses])
+		    round(100*b_wins/(b_wins+b_losses), 2), b_wins+b_losses])
 rank_table.add_row(['Silver', s_pe, s_pu, s_pd, s_wins, s_losses,
-					round(100*s_wins/(s_wins+s_losses), 2), s_wins+s_losses])
+		    round(100*s_wins/(s_wins+s_losses), 2), s_wins+s_losses])
 rank_table.add_row(['Gold', g_pe, g_pu, g_pd, g_wins, g_losses,
-					round(100*g_wins/(g_wins+g_losses), 2), g_wins+g_losses])
+		    round(100*g_wins/(g_wins+g_losses), 2), g_wins+g_losses])
 rank_table.add_row(['Platinum', p_pe, p_pu, p_pd, p_wins, p_losses,
-					round(100*p_wins/(p_wins+p_losses), 2), p_wins+p_losses])
+		    round(100*p_wins/(p_wins+p_losses), 2), p_wins+p_losses])
 rank_table.add_row(['Diamond', d_pe, d_pu, d_pd, d_wins, d_losses,
-					round(100*d_wins/(d_wins+d_losses), 2), d_wins+d_losses])
+		    round(100*d_wins/(d_wins+d_losses), 2), d_wins+d_losses])
 print('%s\n' % rank_table)
 
 print('Meta Breakdown:')
 for d in dl:
 	deck_table.add_row([d, decks[d]['matches'], decks[d]['wins'],
-		  	       		decks[d]['losses'],
-		  	       		round((100*decks[d]['wins']/decks[d]['matches']), 2),
-		  	       		decks[d]['play_wins'], decks[d]['play_losses'],
-		  	       		decks[d]['pwin_pct'], decks[d]['draw_wins'],
-		  	       		decks[d]['draw_losses'], decks[d]['dwin_pct']])
+			    decks[d]['losses'],
+			    round((100*decks[d]['wins']/decks[d]['matches']), 2),
+			    decks[d]['play_wins'], decks[d]['play_losses'],
+			    decks[d]['pwin_pct'], decks[d]['draw_wins'],
+			    decks[d]['draw_losses'], decks[d]['dwin_pct']])
 print('%s\n' % deck_table)
 
 print('Miscelaneous Data:')
 misc_table.add_row(['Mana Flood', flood_w+flood_l, flood_w, flood_l,
-				    round(100*flood_w/(flood_w+flood_l), 2),
-				    round(100*(flood_w+flood_l)/TOTAL_GAMES, 2)])
+		    round(100*flood_w/(flood_w+flood_l), 2),
+		    round(100*(flood_w+flood_l)/TOTAL_GAMES, 2)])
 misc_table.add_row(['Mana Screw', screw_w+screw_l, screw_w, screw_l,
-				    round(100*screw_w/(screw_w+screw_l), 2),
-				    round(100*(screw_w+screw_l)/TOTAL_GAMES, 2)])
+		    round(100*screw_w/(screw_w+screw_l), 2),
+		    round(100*(screw_w+screw_l)/TOTAL_GAMES, 2)])
 misc_table.add_row(['Normal Lands', normal_w+normal_l, normal_w, normal_l,
-				    round(100*normal_w/(normal_w+normal_l), 2),
-				    round(100*(normal_w+normal_l)/TOTAL_GAMES, 2)])
+		    round(100*normal_w/(normal_w+normal_l), 2),
+		    round(100*(normal_w+normal_l)/TOTAL_GAMES, 2)])
 misc_table.add_row(['Mulligan', mull_w+mull_l, mull_w, mull_l,
-				    round(100*mull_w/(mull_w+mull_l), 2),
-				    round(100*(mull_w+mull_l)/TOTAL_GAMES, 2)])
+		    round(100*mull_w/(mull_w+mull_l), 2),
+		    round(100*(mull_w+mull_l)/TOTAL_GAMES, 2)])
 misc_table.add_row(['Opponent Mulligan', mull_opw+mull_opl,
-					mull_opw, mull_opl,
-				    round(100*mull_opw/(mull_opw+mull_opl), 2),
-				    round(100*(mull_opw+mull_opl)/TOTAL_GAMES, 2)])
+		    mull_opw, mull_opl,
+		    round(100*mull_opw/(mull_opw+mull_opl), 2),
+		    round(100*(mull_opw+mull_opl)/TOTAL_GAMES, 2)])
 misc_table.add_row(['Experimental Frenzy', frenzy_w+frenzy_l,
-					frenzy_w, frenzy_l,
-				    round(100*frenzy_w/(frenzy_w+frenzy_l), 2),
-				    round(100*(frenzy_w+frenzy_l)/TOTAL_GAMES, 2)])
+		    frenzy_w, frenzy_l,
+		    round(100*frenzy_w/(frenzy_w+frenzy_l), 2),
+		    round(100*(frenzy_w+frenzy_l)/TOTAL_GAMES, 2)])
 print('%s\n' % misc_table)
 
 # Additional requested table
 additional_table = PrettyTable()
 additional_table.field_names = ['Scenario', 'Games', 'Wins', 'Losses', 'Win %',
-							    '% of Matches']
+				'% of Matches']
 additional_table.add_row(['Mana Flood', flood_w6+flood_l6, flood_w6, flood_l6,
-				    	  round(100*flood_w6/(flood_w6+flood_l6), 2),
-				    	  round(100*(flood_w6+flood_l6)/TOTAL_GAMES, 2)])
+			  round(100*flood_w6/(flood_w6+flood_l6), 2),
+			  round(100*(flood_w6+flood_l6)/TOTAL_GAMES, 2)])
 additional_table.add_row(['Mana Screw', screw_w6+screw_l6, screw_w6, screw_l6,
-					      round(100*screw_w6/(screw_w6+screw_l6), 2),
-					      round(100*(screw_w6+screw_l6)/TOTAL_GAMES, 2)])
+			  round(100*screw_w6/(screw_w6+screw_l6), 2),
+			  round(100*(screw_w6+screw_l6)/TOTAL_GAMES, 2)])
 additional_table.add_row(['Normal Lands', normal_w6+normal_l6, normal_w6,
-						  normal_l6,
-						  round(100*normal_w6/(normal_w6+normal_l6), 2),
-				    	  round(100*(normal_w6+normal_l6)/TOTAL_GAMES, 2)])
+			  normal_l6,
+			  round(100*normal_w6/(normal_w6+normal_l6), 2),
+			  round(100*(normal_w6+normal_l6)/TOTAL_GAMES, 2)])
 additional_table.add_row(['Experimental Frenzy', frenzy_w6+frenzy_l6,
-						  frenzy_w6, frenzy_l6,
-				    	  round(100*frenzy_w6/(frenzy_w6+frenzy_l6), 2),
-				    	  round(100*(frenzy_w6+frenzy_l6)/TOTAL_GAMES, 2)])
+			  frenzy_w6, frenzy_l6,
+			  round(100*frenzy_w6/(frenzy_w6+frenzy_l6), 2),
+			  round(100*(frenzy_w6+frenzy_l6)/TOTAL_GAMES, 2)])
 print('%s\n' % additional_table)				    
-
-
